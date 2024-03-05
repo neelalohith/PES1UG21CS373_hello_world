@@ -1,4 +1,4 @@
-name: Build C++ Project
+name: Build C++ Project (Optional Testing Removed)
 
 on:
   push:
@@ -11,14 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Checkout the code
       - uses: actions/checkout@v3
-      
-      # Step 2: Configure CMake
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NODE_VERSION: 20
+
       - name: Configure CMake
         run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
         
-      # Step 3: Build the project
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config Release
+
+
 
